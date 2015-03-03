@@ -1,0 +1,136 @@
+.offscreen {
+    border: 0;
+    clip: rect(0 0 0 0);
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    width: 1px;
+    position: absolute;
+}
+
+.a11yfy-top-level-menu li:focus {
+    outline: 2px dotted black;
+    z-index: 100;
+}
+.a11yfy-third-level-menu {
+    position: absolute;
+    top: 0;
+    right: -150px;
+    width: 150px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: none;
+}
+
+.a11yfy-mega .a11yfy-third-level-menu {
+    position: static;
+    top: auto;
+    right: auto;
+    width: auto;
+    display:block;
+}
+
+.a11yfy-third-level-menu > li { 
+    min-height: 30px;
+    background: #999999;
+}
+.a11yfy-third-level-menu > li:hover,
+.a11yfy-third-level-menu > li:focus {
+    background: #CCCCCC;
+    color: #000000;
+}
+
+.a11yfy-second-level-menu {
+    position: absolute;
+    top: 30px;
+    left: 0;
+    width: 150px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: none;
+}
+
+.a11yfy-second-level-menu > li {
+    min-height: 30px;
+    background: #999999;
+}
+.a11yfy-second-level-menu > li:hover,
+.a11yfy-second-level-menu > li:focus  {
+    background: #CCCCCC;
+    color: #000000;
+}
+
+.a11yfy-top-level-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.a11yfy-top-level-menu > li {
+    position: relative;
+    float: left;
+    height: 30px;
+    width: 150px;
+    background: #999999;
+}
+.a11yfy-top-level-menu > li:hover,
+.a11yfy-top-level-menu > li:focus  {
+    background: #CCCCCC;
+    color: #000000;
+}
+
+.a11yfy-top-level-menu li:hover > ul,
+.a11yfy-top-level-menu li.open > ul {
+    display: inline;
+}
+
+li.a11yfy-has-submenu:after {
+    content: "\2b46";
+}
+.a11yfy-mega li.a11yfy-has-submenu:after {
+    content: none;
+}
+
+ul.a11yfy-top-level-menu>li.a11yfy-has-submenu:after {
+    content: "\290b";
+}
+.a11yfy-two_col {
+    width:300px;
+}
+
+.a11yfy-three_col {
+    width: 450px;
+}
+
+.a11yfy-four_col {
+    width: 600px;
+}
+
+.a11yfy-col {
+    display:inline;
+    float:left;
+    width: 140px;
+}
+.a11yfy-top-level-menu a {
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+.a11yfy-top-level-menu li:focus>a, .a11yfy-top-level-menu li:hover>a  {
+    color: #000000;
+}
+
+.a11yfy-top-level-menu li {
+    font: bold 14px Arial, Helvetica, sans-serif;
+    color: #FFFFFF;
+    text-decoration: none;
+    padding: 0 0 0 10px;
+
+    display: block;
+    line-height: 30px;
+}
+.a11yfy-top-level-menu li:hover { color: #000000; }

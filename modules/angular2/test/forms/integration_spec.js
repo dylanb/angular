@@ -9,6 +9,7 @@ import {TemplateLoader} from 'angular2/src/core/compiler/template_loader';
 import {ComponentUrlMapper} from 'angular2/src/core/compiler/component_url_mapper';
 import {UrlResolver} from 'angular2/src/core/compiler/url_resolver';
 import {StyleUrlResolver} from 'angular2/src/core/compiler/style_url_resolver';
+import {CssProcessor} from 'angular2/src/core/compiler/css_processor';
 
 import {MockTemplateResolver} from 'angular2/src/mock/template_resolver_mock';
 
@@ -37,7 +38,8 @@ export function main() {
       new NativeShadowDomStrategy(new StyleUrlResolver(urlResolver)),
       tplResolver,
       new ComponentUrlMapper(),
-      urlResolver
+      urlResolver,
+      new CssProcessor(null)
     );
 
     tplResolver.setTemplate(componentType, new Template({
@@ -218,7 +220,7 @@ export function main() {
         });
       });
     });
-    
+
     describe("nested forms", () => {
       it("should init DOM with the given form object", (done) => {
         var form = new ControlGroup({

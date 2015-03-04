@@ -17,7 +17,7 @@ import {ShadowDomStrategy} from './shadow_dom_strategy';
 import {CompileStep} from './pipeline/compile_step';
 import {ComponentUrlMapper} from './component_url_mapper';
 import {UrlResolver} from './url_resolver';
-
+import {CssProcessor} from './css_processor';
 
 /**
  * Cache that stores the ProtoView of the template of a component.
@@ -61,6 +61,7 @@ export class Compiler {
   _componentUrlMapper: ComponentUrlMapper;
   _urlResolver: UrlResolver;
   _appUrl: string;
+  _cssProcessor: CssProcessor;
 
   constructor(changeDetection:ChangeDetection,
               templateLoader:TemplateLoader,
@@ -70,7 +71,8 @@ export class Compiler {
               shadowDomStrategy: ShadowDomStrategy,
               templateResolver: TemplateResolver,
               componentUrlMapper: ComponentUrlMapper,
-              urlResolver: UrlResolver) {
+              urlResolver: UrlResolver,
+              cssProcessor: CssProcessor) {
     this._changeDetection = changeDetection;
     this._reader = reader;
     this._parser = parser;
@@ -87,6 +89,7 @@ export class Compiler {
     this._componentUrlMapper = componentUrlMapper;
     this._urlResolver = urlResolver;
     this._appUrl = urlResolver.resolve(null, './');
+    this._cssProcessor = cssProcessor;
   }
 
   createSteps(component:Type, template: Template):List<CompileStep> {
@@ -102,7 +105,7 @@ export class Compiler {
     var templateUrl = this._templateLoader.getTemplateUrl(template);
 
     return createDefaultSteps(this._changeDetection, this._parser, cmpMetadata, dirMetadata,
-      this._shadowDomStrategy, templateUrl);
+      this._shadowDomStrategy, templateUrl, this._cssProcessor);
   }
 
   compile(component: Type):Promise<ProtoView> {
@@ -150,11 +153,10 @@ export class Compiler {
   // TODO(vicb): union type return ProtoView or Promise<ProtoView>
   _compileTemplate(template: Template, tplElement, component: Type) {
     var pipeline = new CompilePipeline(this.createSteps(component, template));
-    var compilationCtxtDescription = stringify(this._reader.read(component).type);
     var compileElements;
 
     try {
-      compileElements = pipeline.process(tplElement, compilationCtxtDescription);
+      compileElements = pipeline.process(tplElement, stringify(component));
     } catch(ex) {
       return PromiseWrapper.reject(ex);
     }
